@@ -114,8 +114,8 @@ namespace CommandLauncher
         private void ShowWindow()
         {
             this.Show();
-            //IMEController ime = new IMEController();
-            //ime.Off();
+            IMEController ime = new IMEController();
+            ime.Off();
         }
 
         private void HideWindow()
