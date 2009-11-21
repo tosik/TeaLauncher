@@ -1,0 +1,26 @@
+
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLauncher", "CommandLauncher\CommandLauncher.csproj", "{5F3CF269-F625-47C0-B7C6-6B5C4DF5A22A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommandLauncher", "TestCommandLauncher\TestCommandLauncher.csproj", "{2CF1FC06-2CC9-4E20-8D40-F3A5878B45BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F3CF269-F625-47C0-B7C6-6B5C4DF5A22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3CF269-F625-47C0-B7C6-6B5C4DF5A22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3CF269-F625-47C0-B7C6-6B5C4DF5A22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3CF269-F625-47C0-B7C6-6B5C4DF5A22A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF1FC06-2CC9-4E20-8D40-F3A5878B45BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF1FC06-2CC9-4E20-8D40-F3A5878B45BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF1FC06-2CC9-4E20-8D40-F3A5878B45BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF1FC06-2CC9-4E20-8D40-F3A5878B45BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -23,32 +23,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using NUnit.Framework;
+using CommandLauncher;
 
-namespace CommandLauncher
+namespace CommandLauncher.Tests
 {
-    class Test_AutoCompleteMachine
+    [TestFixture]
+    public class Test_AutoCompleteMachine
     {
-        public Test_AutoCompleteMachine()
-        {
-            TestRegistration();
-            TestAutoComplete();
-        }
-
-        void TestRegistration()
+        [Test]
+        public void TestRegistration()
         {
             AutoCompleteMachine cm = new AutoCompleteMachine();
 
             // 登録チェック
             cm.RegisterWord("test");
-            Debug.Assert(cm.HasItem("test"));
+            Assert.AreEqual(true, cm.HasItem("test"));
 
             // 削除チェック
             cm.RemoveWord("test");
-            Debug.Assert(!cm.HasItem("test"));
+            Assert.AreEqual(false, cm.HasItem("test"));
 
             // 削除後登録チェック
             cm.RegisterWord("test");
-            Debug.Assert(cm.HasItem("test"));
+            Assert.AreEqual(true, cm.HasItem("test"));
 
             // 多重登録禁止チェック
             {
@@ -63,9 +61,9 @@ namespace CommandLauncher
                 }
                 finally
                 {
-                    Debug.Assert(catched_multiple_registering_exception);
-                    Debug.Assert(cm.HasItem("test"));
-                    Debug.Assert(cm.GetNumOfWords() == 1);
+                    Assert.AreEqual(true, catched_multiple_registering_exception);
+                    Assert.AreEqual(true, cm.HasItem("test"));
+                    Assert.AreEqual(1, cm.GetNumOfWords());
                 }
             }
 
@@ -83,13 +81,14 @@ namespace CommandLauncher
                 }
                 finally
                 {
-                    Debug.Assert(catched_multiple_removing_exception);
-                    Debug.Assert(!cm.HasItem("test"));
+                    Assert.AreEqual(true, catched_multiple_removing_exception);
+                    Assert.AreEqual(false, cm.HasItem("test"));
                 }
             }
         }
-
-        void TestAutoComplete()
+        
+        [Test]
+        public void TestAutoComplete()
         {
             AutoCompleteMachine cm = new AutoCompleteMachine();
 
@@ -103,53 +102,53 @@ namespace CommandLauncher
             cm.RegisterWord("fuffy");
 
             // 補完
-            Debug.Assert(cm.AutoCompleteWord("t") == "test");
-            Debug.Assert(cm.AutoCompleteWord("te") == "test");
-            Debug.Assert(cm.AutoCompleteWord("ts") == "");
-            Debug.Assert(cm.AutoCompleteWord("h") == "hog");
-            Debug.Assert(cm.AutoCompleteWord("teste") == "testest");
-            Debug.Assert(cm.AutoCompleteWord("f") == "fu");
-            Debug.Assert(cm.AutoCompleteWord("fu") == "fu");
-            Debug.Assert(cm.AutoCompleteWord("fuf") == "fuf");
-            Debug.Assert(cm.AutoCompleteWord("") == "");
+            Assert.AreEqual("test",      cm.AutoCompleteWord("t"));
+            Assert.AreEqual("test",      cm.AutoCompleteWord("te"));
+            Assert.AreEqual("",          cm.AutoCompleteWord("ts"));
+            Assert.AreEqual("hog",       cm.AutoCompleteWord("h"));
+            Assert.AreEqual("testest",   cm.AutoCompleteWord("teste"));
+            Assert.AreEqual("fu",        cm.AutoCompleteWord("f"));
+            Assert.AreEqual("fu",        cm.AutoCompleteWord("fu"));
+            Assert.AreEqual("fuf",       cm.AutoCompleteWord("fuf"));
+            Assert.AreEqual("",          cm.AutoCompleteWord(""));
 
             // 候補
             {
                 List<string> cand = cm.GetCandidates("t");
-                Debug.Assert(cand.Count == 2);
-                Debug.Assert(cand[0] == "test");
-                Debug.Assert(cand[1] == "testest");
+                Assert.AreEqual(2, cand.Count);
+                Assert.AreEqual("test", cand[0]);
+                Assert.AreEqual("testest", cand[1]);
             }
             {
                 List<string> cand = cm.GetCandidates("h");
-                Debug.Assert(cand.Count == 2);
-                Debug.Assert(cand[0] == "hoge");
-                Debug.Assert(cand[1] == "hoghog");
+                Assert.AreEqual(2, cand.Count);
+                Assert.AreEqual("hoge", cand[0]);
+                Assert.AreEqual("hoghog", cand[1]);
             }
             {
                 List<string> cand = cm.GetCandidates("f");
-                Debug.Assert(cand.Count == 3);
-                Debug.Assert(cand[0] == "fuga");
-                Debug.Assert(cand[1] == "fuf");
-                Debug.Assert(cand[2] == "fuffy");
+                Assert.AreEqual(3, cand.Count);
+                Assert.AreEqual("fuga", cand[0]);
+                Assert.AreEqual("fuf", cand[1]); 
+                Assert.AreEqual("fuffy", cand[2]);
             }
             {
                 List<string> cand = cm.GetCandidates("fu");
-                Debug.Assert(cand.Count == 3);
-                Debug.Assert(cand[0] == "fuga");
-                Debug.Assert(cand[1] == "fuf");
-                Debug.Assert(cand[2] == "fuffy");
+                Assert.AreEqual(3, cand.Count);
+                Assert.AreEqual("fuga", cand[0]);
+                Assert.AreEqual("fuf", cand[1]); 
+                Assert.AreEqual("fuffy", cand[2]);
             }
             {
                 List<string> cand = cm.GetCandidates("fug");
-                Debug.Assert(cand.Count == 1);
-                Debug.Assert(cand[0] == "fuga");
+                Assert.AreEqual(1, cand.Count);
+                Assert.AreEqual("fuga", cand[0]);
             }
             {
                 List<string> cand = cm.GetCandidates("fuf");
-                Debug.Assert(cand.Count == 2);
-                Debug.Assert(cand[0] == "fuf");
-                Debug.Assert(cand[1] == "fuffy");
+                Assert.AreEqual(2, cand.Count);
+                Assert.AreEqual("fuf", cand[0]); 
+                Assert.AreEqual("fuffy", cand[1]);
             }
         }
     }

@@ -28,19 +28,22 @@ using System.IO;
 namespace CommandLauncher
 {
     // exceptions
-    class ConfigLoaderNotExistsSectionException : Exception { }
-    class ConfigLoaderMultiKeyException : Exception { }
-    class ConfigLoaderNotKeyValueException : Exception { }
-    class ConfigLoaderSameSectionException : Exception { }
+    public class ConfigLoaderNotExistsSectionException : Exception { }
+    public class ConfigLoaderMultiKeyException : Exception { }
+    public class ConfigLoaderNotKeyValueException : Exception { }
+    public class ConfigLoaderSameSectionException : Exception { }
 
-    class ConfigLoader
+    public class ConfigLoader
     {
         Hashtable m_Conf = new Hashtable();
 
         public void LoadConfigFile(string filename)
         {
-            StreamReader stream = new StreamReader(filename);
+            ParseConfig(new StreamReader(filename));
+        }
 
+        public void ParseConfig(StreamReader stream)
+        {
             string section = null;
 
             string line = "";

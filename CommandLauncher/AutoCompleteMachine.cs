@@ -25,10 +25,10 @@ using System.Text;
 
 namespace CommandLauncher
 {
-    class AutoCompleteMachineMultipleRegisteringException : Exception { }
-    class AutoCompleteMachineMultipleRemovingException : Exception { }
+    public class AutoCompleteMachineMultipleRegisteringException : Exception { }
+    public class AutoCompleteMachineMultipleRemovingException : Exception { }
 
-    class AutoCompleteMachine
+    public class AutoCompleteMachine
     {
         private List<string> m_WordList = new List<string>();
 
