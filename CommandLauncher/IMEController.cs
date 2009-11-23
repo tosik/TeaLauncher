@@ -62,10 +62,10 @@ namespace CommandLauncher
             IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
             ImmSetOpenStatus(ime_handle, TRUE);
         }
+
         public void Off()
         {
             IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
-            ImmSetOpenStatus(ime_handle, TRUE);
             ImmSetOpenStatus(ime_handle, FALSE);
         }
 
