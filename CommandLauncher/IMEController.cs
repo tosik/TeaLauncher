@@ -34,6 +34,9 @@ namespace CommandLauncher
         private static extern int ImmGetContext(IntPtr hWnd);
 
         [DllImport("Imm32.dll")]
+        private static extern int ImmReleaseContext(IntPtr hWnd, IntPtr hIMC);
+
+        [DllImport("Imm32.dll")]
         private static extern int ImmSetConversionStatus(IntPtr hIMC, uint fdwConversion, uint fdwSentence);
 
         [DllImport("Imm32.dll")]
@@ -61,12 +64,14 @@ namespace CommandLauncher
         {
             IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
             ImmSetOpenStatus(ime_handle, TRUE);
+            ImmReleaseContext(this.Handle, ime_handle);
         }
 
         public void Off()
         {
             IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
             ImmSetOpenStatus(ime_handle, FALSE);
+            ImmReleaseContext(this.Handle, ime_handle);
         }
 
         public void Alphanumeric()
