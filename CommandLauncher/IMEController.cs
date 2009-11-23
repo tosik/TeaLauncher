@@ -39,12 +39,18 @@ namespace CommandLauncher
         [DllImport("Imm32.dll")]
         private static extern int ImmGetConversionStatus(IntPtr hIMC, ref uint fdwConversion, ref uint fdwSentence);
 
+        [DllImport("Imm32.dll")]
+        private static extern int ImmSetOpenStatus(IntPtr hIMC, int fOpen);
+
         const int IME_CMODE_NOCONVERSION = 0x0100;
         const int IME_CMODE_FULLSHAPE = 0x0008;
         const int IME_CMODE_ALPHANUMERIC = 0x0000;
         const int IME_CMODE_NATIVE = 0x0001;
         const int IME_CMODE_ROMAN = 0x0010;
         const int IME_CMODE_LANGUAGE = 0x0003;
+
+        const int TRUE = 1;
+        const int FALSE = 0;
 
         protected override void WndProc(ref Message m)
         {
@@ -54,17 +60,19 @@ namespace CommandLauncher
         public void On()
         {
             IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
-            int result = ImmSetConversionStatus(ime_handle, IME_CMODE_NATIVE | IME_CMODE_FULLSHAPE | IME_CMODE_ROMAN, 0);
+            ImmSetOpenStatus(ime_handle, TRUE);
         }
         public void Off()
         {
             IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
+            ImmSetOpenStatus(ime_handle, FALSE);
+        }
+
+        public void Alphanumeric()
+        {
+            IntPtr ime_handle = (IntPtr)ImmGetContext(this.Handle);
             uint conv = 0, sent = 0;
             ImmGetConversionStatus(ime_handle, ref conv, ref sent);
-            uint new_conv = conv;
-            //uint new_conv = conv ^ IME_CMODE_NOCONVERSION;
-            //uint new_conv = conv ^ IME_CMODE_FULLSHAPE;
-            //int result = ImmSetConversionStatus(ime_handle, new_conv, sent);
             int result = ImmSetConversionStatus(ime_handle, IME_CMODE_ALPHANUMERIC, sent);
         }
     }
