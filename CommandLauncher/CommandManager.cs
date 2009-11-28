@@ -42,6 +42,11 @@ namespace CommandLauncher
         void Exit();
     }
 
+    interface ICommandManagerDialogShower
+    {
+        void ShowVersionInfo();
+    }
+
     class CommandManager
         : AutoCompleteMachine
     {
@@ -49,11 +54,17 @@ namespace CommandLauncher
 
         ICommandManagerInitializer m_Initializer;
         ICommandManagerFinalizer m_Finalizer;
+        ICommandManagerDialogShower m_DialogShower;
 
-        public CommandManager(ICommandManagerInitializer initializer, ICommandManagerFinalizer finalizer)
+        public CommandManager(
+            ICommandManagerInitializer initializer,
+            ICommandManagerFinalizer finalizer,
+            ICommandManagerDialogShower dialogshower
+            )
         {
             m_Initializer = initializer;
             m_Finalizer = finalizer;
+            m_DialogShower = dialogshower;
         }
 
         public void RegisterCommand(Command command)
@@ -170,6 +181,9 @@ namespace CommandLauncher
                 case "!exit":
                     RequestExitApplication();
                     break;
+                case "!version":
+                    RequestShowVersionInfo();
+                    break;
             }
         }
 
@@ -254,6 +268,12 @@ namespace CommandLauncher
         {
             // アプリケーション終了を依頼する
             m_Finalizer.Exit();
+        }
+
+        private void RequestShowVersionInfo()
+        {
+            // バージョン情報の表示を依頼する
+            m_DialogShower.ShowVersionInfo();
         }
     }
 }
