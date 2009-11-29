@@ -135,6 +135,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.";
                 LICENSE, version.FileDescription);
         }
 
+        public void ShowError(string message)
+        {
+            MessageBox.Show(message);
+        }
+
         void PressHotkey(object sender, EventArgs e)
         {
             // 非表示なら表示してアクティブにする。アクティブなら非アクティブにして非表示にする。

@@ -45,6 +45,7 @@ namespace CommandLauncher
     interface ICommandManagerDialogShower
     {
         void ShowVersionInfo();
+        void ShowError(string message);
     }
 
     class CommandManager
@@ -184,6 +185,9 @@ namespace CommandLauncher
                 case "!version":
                     RequestShowVersionInfo();
                     break;
+                default:
+                    RequestShowError("not found the command : " + cmd);
+                    break;
             }
         }
 
@@ -274,6 +278,12 @@ namespace CommandLauncher
         {
             // バージョン情報の表示を依頼する
             m_DialogShower.ShowVersionInfo();
+        }
+
+        private void RequestShowError(string message)
+        {
+            // エラー表示を依頼する
+            m_DialogShower.ShowError(message);
         }
     }
 }
