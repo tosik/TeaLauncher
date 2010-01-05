@@ -172,6 +172,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.";
 
             IMEController ime = new IMEController();
             ime.Off();
+            ime.On();
+            ime.Off();
         }
 
         private void HideWindow()
