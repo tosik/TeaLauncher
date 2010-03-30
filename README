@@ -1,0 +1,31 @@
+= TeaLauncher =
+
+Windows Simple Keystroke Launcher.
+
+
+== Usage ==
+
+run:
+TeaLauncher.exe conf/my.conf
+
+Press <Ctrl><Space> to show input window.
+And, input command, press <Enter> to run the command.
+You can use to complement command. You press <Tab> when inputting commands.
+
+edit configure:
+Input command "edit_config" or open conf/my.conf by favorite text editor.
+Edit configure like below format.
+[command_name]
+linkto = URL, file path, or special commands
+
+example:
+[github]
+linkto = http://github.com/
+
+=== special commands ===
+ * !version
+   * show version information
+ * !reload
+   * reload configure file
+ * !exit
+   * exit TeaLauncher
