@@ -153,10 +153,10 @@ hoge = aho
                 try
                 {
                     cl.ParseConfig(StringToStreamReader(@"
-[section]
+[section1]
 hoge
 
-[section]
+[section2]
 foo = bar
 
 "));
