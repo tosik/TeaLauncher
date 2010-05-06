@@ -5,6 +5,8 @@ Windows Simple Keystroke Launcher.
 
 == Usage ==
 
+install .NET Framework 3.5 (+)
+
 run:
 TeaLauncher.exe conf/my.conf
 
